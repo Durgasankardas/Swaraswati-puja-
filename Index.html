@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saraswati Mantra</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        body {
+            background: url('https://source.unsplash.com/1600x900/?temple,indian') no-repeat center center/cover;
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: all 1.5s ease-in-out;
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .container {
+            padding: 20px;
+            background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+            border-radius: 15px;
+            display: none;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+            font-family: 'Poppins', sans-serif;
+            color: #f8f8ff;
+        }
+
+        #mantra-container {
+            font-size: 1.5em;
+            margin-top: 20px;
+            min-height: 50px;
+            font-family: 'Poppins', sans-serif;
+            color: #ffe066;
+        }
+
+        .line {
+            opacity: 0;
+            transition: opacity 2s ease-in-out, transform 1s ease-in-out;
+            transform: translateY(20px);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .line.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border: none;
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ff5e62, #ff9966);
+            transform: scale(1.05);
+        }
+
+        img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        #greeting {
+            font-size: 2em;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            font-family: 'Poppins', sans-serif;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <button id="startButton">Click to Get Attached with Devotion</button>
+    <div class="container hidden" id="content">
+        <img id="saraswatiImage" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Saraswati_Devi.jpg" alt="Maa Saraswati">
+        <h1>Om Aim Saraswatyai Namah</h1>
+        <div id="mantra-container"></div>
+    </div>
+    
+    <script>
+        const mantraLines = [
+            "Ya Kundendu Tushar Hara Dhavala",
+            "Ya Shubhra Vastra Avrita",
+            "Ya Veena Varadanda Manditakara",
+            "Ya Shweta Padmasana",
+            "Ya Brahmachyuta Shankara Prabhritibhir Devai Sada Vandita",
+            "Sa Mam Patu Saraswati Bhagavati",
+            "Nihshesha Jadyapaha"
+        ];
+
+        let container = document.getElementById("mantra-container");
+        let content = document.getElementById("content");
+        let button = document.getElementById("startButton");
+        let image = document.getElementById("saraswatiImage");
+        let index = 0;
+
+        button.addEventListener("click", () => {
+            button.style.display = "none";
+            content.style.display = "block";
+            setTimeout(() => {
+                content.classList.remove("hidden");
+                image.style.opacity = "1";
+                showNextLine();
+            }, 500);
+        });
+
+        function showNextLine() {
+            if (index < mantraLines.length) {
+                let newLine = document.createElement("div");
+                newLine.classList.add("line");
+                newLine.textContent = mantraLines[index];
+                container.appendChild(newLine);
+
+                setTimeout(() => {
+                    newLine.classList.add("show");
+                }, 100);
+
+                index++;
+                setTimeout(showNextLine, 3000);
+            } else {
+                setTimeout(() => {
+                    transitionToGreeting();
+                }, 3000);
+            }
+        }
+
+        function transitionToGreeting() {
+            document.body.style.transition = "all 2s ease-in-out";
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+                document.body.innerHTML = '<h1 style="font-size: 3em; color: #ffcc00; font-family: Poppins, sans-serif; text-shadow: 2px 2px 10px rgba(255,255,255,0.8);">Happy Saraswati Puja!</h1>';
+                document.body.style.opacity = "1";
+                document.body.style.display = "flex";
+                document.body.style.justifyContent = "center";
+                document.body.style.alignItems = "center";
+                document.body.style.height = "100vh";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
